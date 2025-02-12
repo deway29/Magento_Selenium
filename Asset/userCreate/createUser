@@ -1,0 +1,49 @@
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver import ActionChains
+import time
+
+
+# Path ke ChromeDriver (sesuaikan dengan lokasi yang benar)
+webdriver_path = r"C:\Users\dedew\selenium_python\chromedriver-win64\chromedriver-win64\chromedriver.exe"
+
+# Gunakan Service() untuk inisialisasi WebDriver
+service = Service(webdriver_path)
+driver = webdriver.Chrome(service=service)
+driver.maximize_window()
+
+# Contoh: Buka Google
+driver.get("https://magento.softwaretestingboard.com/")
+
+element = driver.find_element(By.XPATH, "//div[@class='panel header']//li[.='Create an Account']").click()
+firstname_input = WebDriverWait(driver, 10).until(
+    EC.element_to_be_clickable((By.XPATH, "//input[@id='firstname']"))
+)
+firstname_input = driver.find_element(By.XPATH, "//input[@id='firstname']")
+firstname_input.send_keys("Jim")
+time.sleep(2)
+lastname_input = driver.find_element(By.XPATH, "//input[@id='lastname']")
+lastname_input.send_keys("Carry")
+time.sleep(2)
+element_hover = driver.find_element(By.XPATH, "//a[contains(.,'Notes')]")
+actions = ActionChains(driver).move_to_element(element_hover).perform()
+time.sleep(2)
+email_input = driver.find_element(By.XPATH, "//input[@id='email_address']")
+email_input.send_keys("JimCarry@icloud.com") 
+time.sleep(2)
+passwordemail_input = driver.find_element(By.XPATH, "//input[@id='password']")
+passwordemail_input.send_keys("@tested123") 
+time.sleep(2)
+confirmpasswordemmail_input = driver.find_element(By.XPATH, "//input[@id='password-confirmation']")
+confirmpasswordemmail_input.send_keys("@tested123") 
+time.sleep(2)
+element = driver.find_element(By.XPATH, "//form[@id='form-validate']//div[@class='primary']").click()
+time.sleep(5)
+
+
+# Tunggu beberapa detik lalu tutup browser
+driver.quit()
