@@ -1,0 +1,13 @@
+class resource:
+    product = "//img[@alt='Radiant Tee']"
+    product_menu = "//span[@class='base']"
+    size = "//div[@class='swatch-attribute size']//div[.='M']"
+    scroll = "//a[@id='tab-label-description-title']"
+    color = "//div[@class='swatch-attribute color']//div[3]"
+    quantity = "//input[@id='qty']"
+    checkout = "//span[.='Add to Cart']"
+    alert_succsess = "//div[@class='message-success success message']/div[contains(.,'You added Radiant Tee to your shopping cart.')]"
+    cart_button = "//div[@class='minicart-wrapper']/a[@href='https://magento.softwaretestingboard.com/checkout/cart/']"
+    item_cart = "//span[.='Item in Cart']"
+    checkout_btn = "//button[@id='top-cart-btn-checkout']"
+    payment_menu = "//span[.='Shipping']"

@@ -23,5 +23,5 @@ def login(driver):
     time.sleep(2)
     driver.find_element(By.XPATH, locator.signin).click()
     time.sleep(5)
-    driver.quit()
+    
 
