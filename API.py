@@ -63,6 +63,9 @@ def delete_data(post_id):
 
     assert response.status_code == 204, "Gagal menghapus data!"
 
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
 def test_api_with_selenium():
     """Menguji API yang dipanggil melalui halaman web."""
     options = Options()
@@ -70,12 +73,14 @@ def test_api_with_selenium():
     service = Service(ChromeDriverManager().install())
     driver = webdriver.Chrome(service=service, options=options)
 
-    driver.get("https://jsonplaceholder.typicode.com/")  # Ganti dengan URL target
+    driver.get("https://reqres.in/")  # Ganti dengan URL yang benar
 
-    time.sleep(3)  # Tunggu JavaScript memuat data
+    print("[SELENIUM] Halaman yang diakses:", driver.current_url)
 
     try:
-        element = driver.find_element(By.TAG_NAME, "pre")
+        element = WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.TAG_NAME, "pre"))
+        )
         print("\n[SELENIUM] API Response on Web Page:", element.text)
     except:
         print("\n[SELENIUM] Gagal menemukan elemen yang menampilkan API.")
